@@ -105,7 +105,16 @@ server <- function(input, output) {
                 ylab("Średnia cena za 1 m2")
             
         }else{
-            ggplot()
+            plotDataWoj<-filter(daneWoj, Wojewodztwo %in% input$WojewodztwaCheckGroup)
+            plotDataMarket<-filter(plotDataWoj, Rynek==input$RynekInput)
+            plotDataArea<-filter(plotDataMarket, Metraz %in% input$MetrazeGroup)
+            plotDataYear<-filter(plotDataArea, Rok == input$RokSelectInput)
+            plotData<-plotDataYear
+            
+            ggplot(plotData, aes(x=Wojewodztwo, y=Liczba.Sprzedanych.M, fill=factor(Metraz))) +
+                geom_bar(stat="identity", position=position_dodge()) + theme(axis.text.x = element_text(angle = 65, hjust = 1)) +
+                labs(title="Liczba sprzedanych mieszkan", fill="Metraz") + 
+                ylab("Liczba sprzedanych mieszkan")
         }
        
     })
