@@ -1,11 +1,12 @@
 # Define UI for application that draws a histogram
-#source("loadData.R")
 daneWoj<-read.csv("mieszkania-woj.csv", encoding = "UTF-8")
 daneBydWaw<-read.csv("mieszkania-bydwaw.csv", encoding = "UTF-8")
 
 library(shiny)
 regions<-factor(daneWoj$Wojewodztwo)%>%levels()
 years<-factor(daneWoj$Rok)%>%levels()
+
+`%!in%` = Negate(`%in%`)
 
 ui <- fluidPage(
     titlePanel(title="Analiza rynkowej sprzedaży lokali mieszkalnych"),
@@ -64,7 +65,7 @@ ui <- fluidPage(
                                 )
                             ),
                             mainPanel(
-                                
+                                plotOutput("plotWoj1")
                             )
                         )   
                ),
@@ -85,7 +86,24 @@ ui <- fluidPage(
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
-    
+    output$plotWoj1<-renderPlot({
+        
+        plotDataWoj<-filter(daneWoj, Wojewodztwo %in% input$WojewodztwaCheckGroup)
+        plotDataMarket<-filter(plotDataWoj, Rynek==input$RynekInput)
+        plotDataArea<-filter(plotDataMarket, Metraz %!in% c("do 40 m2","od 40,1 do 60 m2", "od 60,1 do 80 m2","od 80,1 m2"))
+        plotDataYear<-filter(plotDataArea, Rok %in% input$RokCheckGroup)
+        plotData<-plotDataYear
+        ymax<-round(max(as.vector(plotData[,9])),digits=-4)
+        ystep<-ymax/10
+        
+        ggplot(plotData, aes(x=Wojewodztwo, y=Srednia.Cena.m2, fill=factor(Rok))) +
+            geom_bar(stat="identity", position=position_dodge()) + theme(axis.text.x = element_text(angle = 65, hjust = 1)) +
+            labs(title="Średnie ceny w wojewodztwach", fill="Rok") + 
+            scale_y_continuous(limits=c(0, ymax)) +
+            geom_point(aes(y=Mediana.m2), position=position_dodge(width=0.9), shape=4) +
+            ylab("Średnia cena za 1 m2")
+        
+    })
 }
 
 
