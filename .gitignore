@@ -3,7 +3,6 @@
 sandbox.R
 00*
 01*
-loadData.R
 *.Rproj
 /Zbiory-danych
 .Rproj*

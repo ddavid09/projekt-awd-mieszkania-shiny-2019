@@ -1,6 +1,5 @@
 # Define UI for application that draws a histogram
 daneWoj<-read.csv("mieszkania-woj.csv", encoding = "UTF-8")
-daneBydWaw<-read.csv("mieszkania-bydwaw.csv", encoding = "UTF-8")
 
 library(shiny)
 regions<-factor(daneWoj$Wojewodztwo)%>%levels()
@@ -80,17 +79,6 @@ ui <- fluidPage(
                                            height = "100%")
                             )
                         )   
-               ),
-               tabPanel("Warszawa/Bydgoszcz",
-                        sidebarLayout(
-                            sidebarPanel(
-                                
-                            ),
-                            mainPanel(
-                                
-                            )
-                        )
-                        
                )
                
     )
@@ -146,7 +134,7 @@ server <- function(input, output) {
                   axis.title=element_text(size=16,face="bold"),
                   plot.title = element_text(size=28, face="bold"))
         
-    }, width = 1200, height = 800)
+    }, height = 700)
 }
 
 
