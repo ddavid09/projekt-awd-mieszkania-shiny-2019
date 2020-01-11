@@ -1,6 +1,10 @@
 # Define UI for application that draws a histogram
 daneWoj<-read.csv("mieszkania-woj.csv", encoding = "UTF-8")
 
+#install.packages("dplyr")
+
+library(dplyr)
+library(ggplot2)
 library(shiny)
 regions<-factor(daneWoj$Wojewodztwo)%>%levels()
 years<-factor(daneWoj$Rok)%>%levels()
@@ -19,7 +23,7 @@ ui <- fluidPage(
                                                 "liczba sprzedanych mieszkań(rok/woj)" = 2,
                                                 "liczba sprzedanych mieszkań(cena)" = 3
                                             ),
-                                            label="Wybierz dane do Analizy",
+                                            label="Wybierz dane do analizy",
                                             selected=1
                                             
                                 ),
@@ -76,8 +80,16 @@ ui <- fluidPage(
                             mainPanel(
                                 plotOutput(outputId = "plotWoj1",
                                            width = "100%",
-                                           height = "100%")
-                            )
+                                           height = "100%"),
+                                br(),
+                                br(),
+                                br(),
+                                textOutput("Podpis")
+                                
+                            ),
+                            
+                            
+                            
                         )   
                )
                
@@ -131,10 +143,11 @@ server <- function(input, output) {
                 scale_y_continuous(limits=c(0, ymax))
         }
         gout + theme(axis.text=element_text(size=14),
-                  axis.title=element_text(size=16,face="bold"),
-                  plot.title = element_text(size=28, face="bold"))
+                     axis.title=element_text(size=16,face="bold"),
+                     plot.title = element_text(size=28, face="bold"))
         
     }, height = 700)
+    output$Podpis<-renderText("Projekt wykonał Dominik DAWIDZIAK gr I7B1S1")
 }
 
 
