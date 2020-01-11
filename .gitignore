@@ -8,3 +8,4 @@ sandbox.R
 .Rproj*
 *.xlsx
 .Rproj.user
+*.dcf
