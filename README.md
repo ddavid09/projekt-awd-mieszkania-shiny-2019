@@ -10,3 +10,5 @@ Aplikacja pozwala na intuicyjną, prostą i dynamiczną modyfikację zestawów d
 
 ![image](image.png)
 
+Link do aplikacji:
+[kliknij👆](https://ddawidziak.shinyapps.io/AWD-Projekt-2019-dawidziak/ "Sprawdź działanie aplikacji")
