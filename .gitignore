@@ -7,3 +7,4 @@ sandbox.R
 /Zbiory-danych
 .Rproj*
 *.xlsx
+.Rproj.user

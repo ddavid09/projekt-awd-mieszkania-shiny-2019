@@ -1,0 +1,13 @@
+name: AWD-Projekt-2019-dawidziak
+title: AWD-Projekt-2019-dawidziak
+username:
+account: ddawidziak
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1647476
+bundleId: 2722294
+url: https://ddawidziak.shinyapps.io/AWD-Projekt-2019-dawidziak/
+when: 1578764599.43987
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: loadData.R|sandbox.R|Zbiory-danych
